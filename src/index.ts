@@ -1,3 +1,8 @@
+/*
+ * @Description:
+ * @Date: 2021-08-26 01:06:35
+ * @LastEditTime: 2021-08-26 17:24:34
+ */
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
 import { User } from './models/user';
@@ -5,6 +10,9 @@ import { Post } from './models/post';
 import { Comment } from './models/comment';
 import { UserFollow } from './models/userfollow';
 
+import conditional = require('koa-conditional-get');
+import etag = require('koa-etag');
+import helmet = require('koa-helmet');
 import Koa = require('koa');
 import jwt = require('koa-jwt');
 import * as config from './config';
@@ -19,7 +27,7 @@ import { logger } from './middlewares/logger';
 
 createConnection({
 	type: 'mysql',
-	host: 'localhost',
+	host: '172.27.1.3',
 	port: 3306,
 	username: 'root',
 	password: 'wanlov2008',
@@ -30,6 +38,9 @@ createConnection({
 	.then(() => {
 		const app = new Koa();
 		app.use(logger());
+		app.use(conditional());
+		app.use(etag());
+		app.use(helmet());
 		app.use(cors());
 		app.use(serve('public'));
 

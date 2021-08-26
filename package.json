@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "lib/index.js",
 	"scripts": {
-		"start": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts",
+		"start": "nodemon --watch 'src/**/*' -e ts,tsx --exec cross-env ts-node ./src/index.ts",
 		"build": "rollup -c",
 		"watch": "tsc --watch",
 		"test": "jest --no-cache",
@@ -19,6 +19,9 @@
 		"koa-jwt": "^4.0.1",
 		"koa-router": "^10.0.0",
 		"koa-static": "^5.0.0",
+		"koa-conditional-get": "3.0.0",
+		"koa-etag": "4.0.0",
+		"koa-helmet": "6.1.0",
 		"@koa/cors": "3.1.0",
 		"log4js": "^6.3.0",
 		"mysql2": "^2.3.0",
