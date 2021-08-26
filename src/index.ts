@@ -1,7 +1,7 @@
 /*
- * @Description:
+ * @Description: blog server main
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-26 17:24:34
+ * @LastEditTime: 2021-08-26 22:38:57
  */
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
@@ -17,7 +17,7 @@ import Koa = require('koa');
 import jwt = require('koa-jwt');
 import * as config from './config';
 import cors = require('@koa/cors');
-import { router } from './routes';
+import v2 from './routes';
 
 import serve = require('koa-static');
 import koaBody = require('koa-body');
@@ -88,7 +88,7 @@ createConnection({
 			})
 		);
 
-		app.use(router.routes()).use(router.allowedMethods());
+		app.use(v2.routes()).use(v2.allowedMethods());
 
 		// 控制台输出用户错误
 		app.on('error', (err, ctx: Koa.Context) => {

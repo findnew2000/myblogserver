@@ -1,11 +1,29 @@
+/*
+ * @Description: 导入路由
+ * @Version: 2.0
+ * @Date: 2021-08-26 01:06:35
+ * @LastEditTime: 2021-08-26 22:38:08
+ */
 import Router = require('koa-router');
-import AuthController from './controllers/auth';
-import UserController from './controllers/user';
-import PostController from './controllers/post';
-import CommentController from './controllers/comment';
-import FollowController from './controllers/userfollow';
+import * as Auth from './controllers/auth';
+import * as User from './controllers/user';
+import * as Post from './controllers/post';
+import * as Comment from './controllers/comment';
+import * as Follow from './controllers/userfollow';
 
-const router = new Router();
+const v2 = new Router({
+	prefix: '/v2',
+});
+
+v2.use(Auth.router.routes());
+v2.use(Comment.router.routes());
+v2.use(Post.router.routes());
+v2.use(User.router.routes());
+v2.use(Follow.router.routes());
+
+export default v2;
+
+/* const router = new Router();
 
 router.post('/auth/login', AuthController.login); //
 router.post('/auth/register', AuthController.register); //
@@ -28,4 +46,4 @@ router.delete('/api/comment/:id', CommentController.deleteComment);
 router.post('/api/follow/:id', FollowController.setFans);
 router.post('/api/followstatus/:id', FollowController.getFans);
 
-export { router };
+export { router }; */
