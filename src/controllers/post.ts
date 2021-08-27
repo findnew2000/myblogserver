@@ -2,7 +2,7 @@
  * @Description:发帖相关路由
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-26 21:29:24
+ * @LastEditTime: 2021-08-27 17:20:29
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
@@ -14,11 +14,11 @@ const router = new Router({
 });
 
 /**
- * @description: /post/posts 列出所有帖子
+ * @description: get /post/list 列出所有帖子
  * @param {*}
  * @return {*} (id author title pv)
  */
-router.get('/posts', async (ctx: Context) => {
+router.get('/list', async (ctx: Context) => {
 	const posts = await Post.find({
 		select: ['id', 'author', 'title', 'pv'],
 	});

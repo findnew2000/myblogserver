@@ -2,7 +2,7 @@
  * @Description: 用户关注
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-26 22:36:54
+ * @LastEditTime: 2021-08-27 17:30:17
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
@@ -13,7 +13,7 @@ const router = new Router({
 });
 
 /**
- * @description: /follow/:id 建立或改变关注状态
+ * @description: put /follow/:id 建立或改变关注状态
  * @param {jwt} token
  * @param {string} followusername
  * @return {bool} true | false
@@ -45,7 +45,7 @@ router.put('/:id', async (ctx: Context) => {
 });
 
 /**
- * @description: /follow/:id 查询关注状态
+ * @description: post /follow/:id 查询关注状态
  * @param {jwt} token
  * @param {string} followusername
  * @return {bool} true | false

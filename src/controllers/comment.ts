@@ -2,14 +2,14 @@
  * @Description:回帖处理
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-26 19:36:00
+ * @LastEditTime: 2021-08-27 16:58:54
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
 import { Comment } from '../models/comment';
 
 const router = new Router({
-	prefix: '/api/comment',
+	prefix: '/comment',
 });
 
 /**

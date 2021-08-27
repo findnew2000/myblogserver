@@ -1,3 +1,10 @@
+<!--
+ * @Description:
+ * @Version: 1.0
+ * @Date: 2021-08-14 20:04:57
+ * @LastEditTime: 2021-08-27 17:49:52
+-->
+
 # 表结构
 
 > ## 用户表：user
@@ -42,45 +49,45 @@
 |  3  | post    | int11     | post=>id      |
 |  4  | content | text      | null          |
 
-# 接口
+# 接口 http://server/v2
 
-> ## 验证接口（AuthController）
+> ## 验证接口（Auth）
 
-| No  | 方法 | 路由          | ID  | 参数              | 返回值                          | 函数     |
-| :-: | ---- | ------------- | :-: | ----------------- | ------------------------------- | -------- |
-|  1  | post | /auth/login   |     | username,password | "Authorization":"Bearer "+token | login    |
-|  2  | post | /ath/register |     | username,password | 200                             | register |
+| No  | Method | Route          | ID  | Params            | Return                          |
+| :-: | ------ | -------------- | :-: | ----------------- | ------------------------------- |
+|  1  | post   | /auth/login    |     | username,password | "Authorization":"Bearer "+token |
+|  2  | post   | /auth/register |     | username,password | 200                             |
 
-> ## 用户接口（UserController）
+> ## 用户接口（User）
 
-| No  | 方法   | 路由       | ID  | 参数 | 返回值                 | 函数           |
-| :-: | ------ | ---------- | :-: | ---- | ---------------------- | -------------- |
-|  1  | get    | /users     | jwt |      | user=>username list    | listUsers      |
-|  2  | post   | /user/:id  | jwt |      | user=>name,avatar,mood | showUserDetail |
-|  3  | put    | /users/:id |     |      |                        | updateUser     |
-|  4  | delete | /users/:id |     |      |                        | deleteUser     |
+| No  | Method | Route      | ID  | Params | Return                 |
+| :-: | ------ | ---------- | :-: | ------ | ---------------------- |
+|  1  | get    | /user      | jwt |        | user=>username list    |
+|  2  | get    | /user/:id  |     |        | user=>name,avatar,mood |
+|  3  | put    | /users/:id |     |        |                        |
+|  4  | delete | /users/:id |     |        |                        |
 
-> ## 帖子接口（PostController）
+> ## 帖子接口（Post）
 
-| No  | 方法   | 路由              | ID  | 参数                | 返回值                               | 函数         |
-| :-: | ------ | ----------------- | :-: | ------------------- | ------------------------------------ | ------------ |
-|  1  | get    | /api/posts        | jwt |                     | posts=>id author title pv            | getListPosts |
-|  2  | get    | /api/post/:postid |     |                     | post=>all comment=>id author content | getPost      |
-|  3  | post   | /api/post/:id     | jwt | title content image |                                      | postPost     |
-|  4  | put    | /api/post/:id     |     |                     |                                      | putPost      |
-|  5  | delete | /api/post/:id     |     |                     |                                      | deletePost   |
-|  6  | post   | /api/upload/:id   | jwt | file                | url / 401                            | uploadFile   |
+| No  | Method | Route            | ID  | Params              | Return                             |
+| :-: | ------ | ---------------- | :-: | ------------------- | ---------------------------------- |
+|  1  | get    | /post/list       |     |                     | [{id,author,title,pv}]             |
+|  2  | get    | /post/:postid    |     |                     | {post=>all, [{id,author,content}]} |
+|  3  | post   | /post/:id        | jwt | title content image |                                    |
+|  4  | put    | /post/:id        |     |                     |                                    |
+|  5  | delete | /post/:id        |     |                     |                                    |
+|  6  | post   | /post/upload/:id | jwt | file                | url / 401                          |
 
-> ## 回帖接口（CommentController）
+> ## 回帖接口（Comment）
 
-| No  | Method | Route            | ID  | Param          | Return | Func          |
-| :-: | ------ | ---------------- | :-: | -------------- | ------ | ------------- |
-|  1  | post   | /api/comment/:id | jwt | postid content |        | postComment   |
-|  2  | delete | /api/comment/:id |     |                |        | deleteComment |
+| No  | Method | Route        | ID  | Param          | Return |
+| :-: | ------ | ------------ | :-: | -------------- | ------ |
+|  1  | post   | /comment/:id | jwt | postid content |        |
+|  2  | delete | /comment/:id |     |                |        |
 
-> ## 关注接口（FollowController）
+> ## 关注接口（Follow）
 
-| No  | Method | Route                 | ID  | Param          | Return     | Func    |
-| :-: | ------ | --------------------- | :-: | -------------- | ---------- | ------- |
-|  1  | post   | /api/follow/:id       | jwt | followusername | true/flase | setFans |
-|  2  | post   | /api/followstatus/:id | jwt | followusername | true/flase | getFans |
+| No  | Method | Route       | ID  | Param          | Return     |
+| :-: | ------ | ----------- | :-: | -------------- | ---------- |
+|  1  | put    | /follow/:id | jwt | followusername | true/flase |
+|  2  | post   | /follow/:id | jwt | followusername | true/flase |

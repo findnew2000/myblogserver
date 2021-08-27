@@ -2,7 +2,7 @@
  * @Description: 用户账户
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-26 22:02:12
+ * @LastEditTime: 2021-08-27 17:26:32
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
@@ -15,7 +15,7 @@ const router = new Router({
 });
 
 /**
- * @description: /user
+ * @description: get /user
  * @param {jwt} token
  * @return {*} [username]
  */
@@ -44,13 +44,14 @@ router.get('/', async (ctx: Context) => {
 });
 
 /**
- * @description: /user/:id 列出用户详细信息
+ * @description: get /user/:id 列出用户详细信息
  * @param {jwt} token
  * @return {*} {name,avatar,mood} | 401
  */
-router.post('/:id', async (ctx: Context) => {
-	const username = ctx.state.user.sub;
-	if (username !== ctx.request.body.id) ctx.throw(401, '没有登录');
+router.get('/:id', async (ctx: Context) => {
+	// const username = ctx.state.user.sub;
+	// console.log(username, ctx.params.id);
+	// if (username !== ctx.params.id) ctx.throw(401, '没有登录');
 	const user = await User.findOne({
 		select: ['name', 'avatar', 'mood'],
 		where: { username: ctx.params.id },
