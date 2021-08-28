@@ -1,8 +1,8 @@
 /*
- * @Description: 用户互相关注表
+ * @Description: 帖子点赞
  * @Version: 1.0
- * @Date: 2021-08-22 21:17:46
- * @LastEditTime: 2021-08-27 21:18:43
+ * @Date: 2021-08-27 20:54:09
+ * @LastEditTime: 2021-08-27 20:55:24
  */
 import {
 	BaseEntity,
@@ -14,24 +14,27 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class UserFollow extends BaseEntity {
+export class PostOK extends BaseEntity {
 	@Column()
 	@PrimaryGeneratedColumn()
 	id!: number;
 
 	@Column({
-		type: 'varchar',
-		length: 50,
+		comment: '被点赞帖子ID',
 	})
-	followUsername!: string;
+	okPostid!: number;
 
+	// FIXME 用户名应该换成uid
 	@Column({
 		type: 'varchar',
 		length: 50,
+		comment: '点赞帖子用户名',
 	})
-	fansUsername!: string;
+	okUsername!: string;
 
-	@Column()
+	@Column({
+		comment: '点赞状态',
+	})
 	status!: boolean;
 
 	@CreateDateColumn()

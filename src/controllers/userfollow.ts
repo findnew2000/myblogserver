@@ -2,7 +2,7 @@
  * @Description: 用户关注
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-27 17:30:17
+ * @LastEditTime: 2021-08-28 01:23:25
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
@@ -75,11 +75,11 @@ router.post('/:id', async (ctx: Context) => {
  * @return {boolean} true
  */
 function followAuth(ctx: Context): boolean {
-	if (ctx.state.user.sub !== ctx.params.id) ctx.throw(401, '没有权限');
-	if (!ctx.request.body.followUsername) ctx.throw(401, 'param null');
+	if (ctx.state.user.sub !== ctx.params.id) ctx.throw(401);
+	if (!ctx.request.body.followUsername) ctx.throw(400);
 	const user = ctx.state.user.sub;
 	const followUsername = ctx.request.body.followUsername;
-	if (user === followUsername) ctx.throw(401, 'fuck youself');
+	if (user === followUsername) ctx.throw(400, 'fuck youself');
 	return true;
 }
 

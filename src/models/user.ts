@@ -1,3 +1,9 @@
+/*
+ * @Description: 用户模型
+ * @Version: 1.0
+ * @Date: 2021-08-13 02:37:42
+ * @LastEditTime: 2021-08-27 19:52:21
+ */
 import {
 	Column,
 	Entity,
@@ -36,6 +42,9 @@ export class User extends BaseEntity {
 	@Column({ nullable: true })
 	avatar!: string; //头像
 
+	@Column({ nullable: true })
+	backimage!: string; //背景图
+
 	@Column({
 		nullable: true,
 		type: 'varchar',
@@ -52,26 +61,35 @@ export class User extends BaseEntity {
 		comment: '名字',
 	})
 	name!: string;
-	// @Column({
-	// 	type: 'enum',
-	// 	enum: Gender,
-	// 	default: Gender.x,
-	// })
-	// gender!: Gender; //性别 enum
 
-	// @Column({
-	// 	charset: 'utf8mb4',
-	// 	type: 'varchar',
-	// 	length: 200,
-	// })
-	// bio!: string; //简介
+	@Column({
+		type: 'enum',
+		enum: Gender,
+		default: Gender.x,
+		comment: '性别',
+	})
+	gender!: Gender; //性别 enum
 
-	// @CreateDateColumn()
-	// createDate!: Date;
+	@Column({
+		nullable: true,
+		charset: 'utf8mb4',
+		type: 'varchar',
+		length: 200,
+		comment: '地址',
+	})
+	address!: string;
 
-	// @UpdateDateColumn()
-	// updateDate!: Date;
+	@Column({
+		comment: '积分',
+	})
+	bp!: number;
 
-	// @VersionColumn()
-	// version!: number;
+	@CreateDateColumn()
+	createdate!: Date;
+
+	@UpdateDateColumn()
+	updatedate!: Date;
+
+	@VersionColumn()
+	version!: number;
 }

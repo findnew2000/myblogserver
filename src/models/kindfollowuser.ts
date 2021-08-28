@@ -1,8 +1,8 @@
 /*
- * @Description: 用户互相关注表
+ * @Description:分类关注表
  * @Version: 1.0
- * @Date: 2021-08-22 21:17:46
- * @LastEditTime: 2021-08-27 21:18:43
+ * @Date: 2021-08-27 20:49:06
+ * @LastEditTime: 2021-08-27 20:56:09
  */
 import {
 	BaseEntity,
@@ -14,24 +14,27 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class UserFollow extends BaseEntity {
+export class KindFollowUser extends BaseEntity {
 	@Column()
 	@PrimaryGeneratedColumn()
 	id!: number;
 
 	@Column({
-		type: 'varchar',
-		length: 50,
+		comment: '被关注的分类ID',
 	})
-	followUsername!: string;
+	followKindid!: number;
 
+	// FIXME 用户名应该换成uid
 	@Column({
 		type: 'varchar',
 		length: 50,
+		comment: '关注该分类的用户名',
 	})
 	fansUsername!: string;
 
-	@Column()
+	@Column({
+		comment: '喜欢状态',
+	})
 	status!: boolean;
 
 	@CreateDateColumn()

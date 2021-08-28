@@ -1,3 +1,9 @@
+/*
+ * @Description:
+ * @Version: 1.0
+ * @Date: 2021-08-14 02:09:13
+ * @LastEditTime: 2021-08-27 20:39:59
+ */
 import {
 	BaseEntity,
 	Column,
@@ -28,7 +34,7 @@ export class Comment extends BaseEntity {
 	@Column({
 		type: 'text',
 		charset: 'utf8mb4',
-		comment: '评论',
+		comment: '评论内容',
 	})
 	content!: string;
 }

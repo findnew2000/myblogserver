@@ -1,9 +1,17 @@
+/*
+ * @Description: 帖子模型
+ * @Version: 1.0
+ * @Date: 2021-08-13 23:35:06
+ * @LastEditTime: 2021-08-27 21:21:17
+ */
 import {
 	Entity,
 	Column,
 	PrimaryGeneratedColumn,
 	Index,
 	BaseEntity,
+	CreateDateColumn,
+	UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -18,6 +26,11 @@ export class Post extends BaseEntity {
 		comment: '用户名',
 	})
 	author!: string;
+
+	@Column({
+		comment: '分类id',
+	})
+	kindid!: number;
 
 	@Column({
 		type: 'varchar',
@@ -37,7 +50,7 @@ export class Post extends BaseEntity {
 	@Column({
 		type: 'int',
 		nullable: true,
-		comment: '点赞数',
+		comment: '浏览量',
 	})
 	pv!: number;
 
@@ -48,4 +61,10 @@ export class Post extends BaseEntity {
 		comment: '图片',
 	})
 	avatar!: string;
+
+	@CreateDateColumn()
+	createtime!: Date;
+
+	@UpdateDateColumn()
+	updatetime!: Date;
 }

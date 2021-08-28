@@ -1,21 +1,19 @@
 /*
- * @Description: blog server main
- * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-27 02:04:44
+ * @Description:main
+ * @Version: 1.3
+ * @Date: 2021-08-27 02:54:22
+ * @LastEditTime: 2021-08-28 18:50:13
  */
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
-import { User } from './models/user';
-import { Post } from './models/post';
-import { Comment } from './models/comment';
-import { UserFollow } from './models/userfollow';
+import { Mysql, JWT_SECRET, WebServerPort } from './config';
 
 import conditional = require('koa-conditional-get');
 import etag = require('koa-etag');
 import helmet = require('koa-helmet');
+import * as Server from 'http';
 import Koa = require('koa');
 import jwt = require('koa-jwt');
-import * as config from './config';
 import cors = require('@koa/cors');
 import v2 from './routes';
 
@@ -26,22 +24,16 @@ import path = require('path');
 import { logger } from './middlewares/logger';
 
 const app = new Koa();
+const server = Server.createServer(app.callback());
 
 (async () => {
 	try {
-		await createConnection({
-			type: 'mysql',
-			host: '172.27.1.3',
-			port: 3306,
-			username: 'root',
-			password: 'wanlov2008',
-			database: 'test',
-			synchronize: true,
-			entities: [User, Post, Comment, UserFollow],
-		});
+		await createConnection(Mysql);
 		console.log('db connected');
-		app.listen(config.WebServerPort, '0.0.0.0');
-		console.log(`server listen port ${config.WebServerPort}`);
+
+		server.listen(WebServerPort, '0.0.0.0', () => {
+			console.log(`server listen port ${WebServerPort}`);
+		});
 	} catch (e) {
 		console.log(e);
 	}
@@ -67,7 +59,7 @@ app.use(async (ctx, next) => {
 
 // JWT拦截
 app.use(
-	jwt({ secret: config.JWT_SECRET }).unless({
+	jwt({ secret: JWT_SECRET }).unless({
 		method: 'GET',
 		path: [/\/register/, /\/login/],
 	})
@@ -101,4 +93,4 @@ app.on('error', (err, ctx: Koa.Context) => {
 	// console.error(`${ctx.method} ${ctx.originalUrl} ${err.message}`);
 });
 
-export default app;
+export default server;
