@@ -18,7 +18,7 @@
 | 12  | updatadate | Date       |               ||
 | 13  | version    | int        |              ||
 
-> ## 关注表：UserFollow
+> ## 关注表：`UserFollow`
 
 | No  | Field          | Type      | Default       |
 | :-: | -------------- | --------- | ------------- |
@@ -115,12 +115,12 @@
 
 > ## 用户接口（User）
 
-| No  | Method | Route      | ID  | Params | Return                 |
-| :-: | ------ | ---------- | :-: | ------ | ---------------------- |
-|  1  | get    | /user      | jwt |        | user=>username list    |
-|  2  | get    | /user/:id  |     |        | user=>name,avatar,mood |
-|  3  | put    | /users/:id |     |        |                        |
-|  4  | delete | /users/:id |     |        |                        |
+|  No  | Method | Route      |  ID  | Params                                          | Return                 |
+| :--: | ------ | ---------- | :--: | ----------------------------------------------- | ---------------------- |
+|  1   | get    | /user      | jwt  |                                                 | user=>username list    |
+|  2   | get    | /user/:id  |      |                                                 | user=>name,avatar,mood |
+|  3   | put    | /users/:id | jwt  | oldpass,newpass,ava,<br>img,moo,name,gender,add | true                   |
+|  4   | delete | /users/:id |      |                                                 |                        |
 
 > ## 帖子接口（Post）
 
@@ -128,9 +128,9 @@
 | :--: | ------ | -------------------------- | :--: | -------------------------- | ---------------------------------- |
 |  1   | get    | /post/list                 |      | postid,len,kind            | [{id,author,title,pv}]             |
 |  2   | get    | /post/:postid              |      |                            | {post=>all, [{id,author,content}]} |
-|  3   | post   | /post/:id                  | jwt  | title content image kind   |                                    |
-|  4   | put    | /post/:postid              | jwt  | postid title content image |                                    |
-|  5   | delete | /post/:postid              | jwt  | postid                     |                                    |
+|  3   | post   | /post/:id                  | jwt  | title content image kind   | 200/401                            |
+|  4   | put    | /post/:postid              | jwt  | postid title content image | true/false                         |
+|  5   | delete | /post/:postid              | jwt  | postid                     | true/false                         |
 |  6   | post   | /post/upload/:id           | jwt  | file                       | url / 401                          |
 |  7   | put    | /post/follow/:followpostid | jwt  | followpostid,fansusername  | true/false                         |
 |  8   | post   | /post/follow/:followpostid | jwt  | followpostid,fansusername  | true/falseuser                     |
@@ -140,11 +140,12 @@
 |  No  | Method | Route               |  ID  | Param          | Return |
 | :--: | ------ | ------------------- | :--: | -------------- | ------ |
 |  1   | post   | /comment/:id        | jwt  | postid content |        |
-|  2   | delete | /comment/:commentid | jwt  | ````           |        |
+|  2   | delete | /comment/:commentid | jwt  |                |        |
 
 > ## 关注接口（Follow）
 
-| No  | Method | Route       | ID  | Param          | Return     |
-| :-: | ------ | ----------- | :-: | -------------- | ---------- |
-|  1  | put    | /follow/:id | jwt | followusername | true/flase |
-|  2  | post   | /follow/:id | jwt | followusername | true/flase |
+|  No  | Method | Route       |  ID  | Param          | Return     |
+| :--: | ------ | ----------- | :--: | -------------- | ---------- |
+|  1   | put    | /follow/:id | jwt  | followUsername | true/flase |
+|  2   | post   | /follow/:id | jwt  | followUsername | true/flase |
+

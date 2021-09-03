@@ -2,7 +2,7 @@
  * @Description: 处理用户注册和登录授权
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-28 17:34:18
+ * @LastEditTime: 2021-09-04 00:14:57
  */
 import { ServerName, JWT_SECRET } from '../config';
 import jwt = require('jsonwebtoken');

@@ -2,7 +2,7 @@
  * @Description:发帖相关路由
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-29 02:26:25
+ * @LastEditTime: 2021-08-29 02:36:24
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
@@ -39,7 +39,7 @@ router.get('/list', async (ctx: Context) => {
 /**
  * @description: /post/upload/:id
  * @param {jwt} token
- * @param {File} (file)
+ * @param {File} file
  * @return {*} 200 url| 401
  */
 router.post('/upload/:id', async (ctx: Context) => {
@@ -69,7 +69,7 @@ router.post('/upload/:id', async (ctx: Context) => {
 
 /**
  * @description: /post/:postid 返回帖子正文
- * @param {string} postid
+ * @param {number} postid
  * @return {*} 200 {{id,author,title,content,pv,avatar},[{id,author,content}]}|404
  */
 router.get('/:postid', async (ctx: Context) => {
@@ -141,6 +141,7 @@ router.delete('/:postid', async (ctx: Context) => {
 /**
  * @description: /post/:postid 改贴
  * @param {number} postid
+ * @param {*} jwt
  * @param {string} (title content image)
  * @return {bool}
  */
