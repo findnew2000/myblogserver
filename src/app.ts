@@ -2,7 +2,7 @@
  * @Description:main
  * @Version: 1.3
  * @Date: 2021-08-27 02:54:22
- * @LastEditTime: 2021-08-28 18:50:13
+ * @LastEditTime: 2021-09-30 00:08:10
  */
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
@@ -50,7 +50,7 @@ app.use(serve('public'));
 app.use(async (ctx, next) => {
 	try {
 		await next();
-	} catch (err) {
+	} catch (err: any) {
 		ctx.status = err.status;
 		ctx.body = { message: err.message };
 		ctx.app.emit('error', err, ctx);

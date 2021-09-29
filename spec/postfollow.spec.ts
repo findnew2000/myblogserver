@@ -8,7 +8,7 @@ import supertest = require('supertest');
 import server from '../src/app';
 import { Connection, createConnection } from 'typeorm';
 import { Mysql } from '../src/config';
-import { PostFollow } from './../src/models/postfollow';
+import { PostFollow } from '../src/models/postfollow';
 
 describe('喜欢帖子功能测试', () => {
 	const request = supertest(server);

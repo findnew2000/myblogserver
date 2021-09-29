@@ -2,7 +2,7 @@
  * @Description:发帖相关路由
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-08-29 02:36:24
+ * @LastEditTime: 2021-09-30 01:04:05
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
@@ -22,10 +22,10 @@ const router = new Router({
  * @return {[{id,author,title,pv}]} length default 10
  */
 router.get('/list', async (ctx: Context) => {
-	const postid = ctx.query.postid ?? 0;
-	const len = Number(ctx.query.len) ?? 10;
-	const kind = Number(ctx.query.kind) ?? 0;
-	// console.warn(postid, len);
+	const postid = ctx.query.postid || 0;
+	const len = Number(ctx.query.len) || 10;
+	const kind = Number(ctx.query.kind) || 0;
+	// console.warn(postid, len, kind);
 	const posts = await Post.find({
 		select: ['id', 'author', 'title', 'pv'],
 		where: { kindid: kind, id: MoreThan(postid) },

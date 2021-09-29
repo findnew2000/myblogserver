@@ -8,7 +8,7 @@ import supertest = require('supertest');
 import server from '../src/app';
 import { Connection, createConnection } from 'typeorm';
 import { Mysql } from '../src/config';
-import { Comment } from './../src/models/comment';
+import { Comment } from '../src/models/comment';
 
 describe('回复功能', () => {
 	const req = supertest(server);
