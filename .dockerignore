@@ -2,17 +2,19 @@ node_modules
 npm-debug.log
 
 .DS*
+.dockerignore
 .git
-.vscode
 .gitignore
+.vscode
+Dockerfile
+README.md
+
+doc
+jest*
+package-lock.json
 
 public
-doc
-test
-
-package-lock.json
-tsconfig.json
-
-jest*
 rollup*
-
+spec
+src
+tsconfig.json

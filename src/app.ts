@@ -2,7 +2,7 @@
  * @Description:main
  * @Version: 1.3
  * @Date: 2021-08-27 02:54:22
- * @LastEditTime: 2021-09-30 00:08:10
+ * @LastEditTime: 2021-10-04 12:59:22
  */
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
@@ -11,7 +11,7 @@ import { Mysql, JWT_SECRET, WebServerPort } from './config';
 import conditional = require('koa-conditional-get');
 import etag = require('koa-etag');
 import helmet = require('koa-helmet');
-import * as Server from 'http';
+import * as Server from 'https';
 import Koa = require('koa');
 import jwt = require('koa-jwt');
 import cors = require('@koa/cors');
@@ -24,7 +24,12 @@ import path = require('path');
 import { logger } from './middlewares/logger';
 
 const app = new Koa();
-const server = Server.createServer(app.callback());
+import * as fs from 'fs';
+const option = {
+	key: fs.readFileSync('./privkey1.pem', 'utf8'),
+	cert: fs.readFileSync('./cert1.pem', 'utf8'),
+};
+const server = Server.createServer(option, app.callback());
 
 (async () => {
 	try {
@@ -32,7 +37,7 @@ const server = Server.createServer(app.callback());
 		console.log('db connected');
 
 		server.listen(WebServerPort, '0.0.0.0', () => {
-			console.log(`server listen port ${WebServerPort}`);
+			console.log(`https server listen port ${WebServerPort}`);
 		});
 	} catch (e) {
 		console.log(e);
