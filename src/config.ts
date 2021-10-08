@@ -2,11 +2,11 @@
  * @Description:系统配置
  * @Version: 2.0
  * @Date: 2021-08-27 02:54:22
- * @LastEditTime: 2021-09-30 01:23:05
+ * @LastEditTime: 2021-10-05 22:25:04
  */
 export const JWT_SECRET = 'thisaresecretkey';
 export const WebServerPort = 3001;
-export const ServerName = 'http://findnew.ddns.net:3001';
+export const ServerName = 'https://www.snmimi.ml:3000';
 
 import { ConnectionOptions } from 'typeorm';
 import { User } from './models/user';

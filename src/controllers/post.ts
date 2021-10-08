@@ -2,7 +2,7 @@
  * @Description:发帖相关路由
  * @Version: 2.0
  * @Date: 2021-08-26 01:06:35
- * @LastEditTime: 2021-09-30 01:04:05
+ * @LastEditTime: 2021-10-05 22:40:38
  */
 import Router = require('koa-router');
 import { Context } from 'koa';
@@ -44,12 +44,13 @@ router.get('/list', async (ctx: Context) => {
  */
 router.post('/upload/:id', async (ctx: Context) => {
 	const name = ctx.state.user.sub;
+	const https = ctx.state.user.iss;
 	if (name === ctx.params.id) {
 		let file: any = ctx.request.files?.file;
 		if (file) {
 			let url: string = file.path;
 			url =
-				ctx.origin +
+				https +
 				'/' +
 				url
 					.toString()

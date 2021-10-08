@@ -1,8 +1,8 @@
 /*
  * @Description:main
- * @Version: 1.3
+ * @Version: 1.4
  * @Date: 2021-08-27 02:54:22
- * @LastEditTime: 2021-10-04 12:59:22
+ * @LastEditTime: 2021-10-07 21:01:24
  */
 import { createConnection } from 'typeorm';
 import 'reflect-metadata';
@@ -11,13 +11,13 @@ import { Mysql, JWT_SECRET, WebServerPort } from './config';
 import conditional = require('koa-conditional-get');
 import etag = require('koa-etag');
 import helmet = require('koa-helmet');
-import * as Server from 'https';
+import * as http2 from 'http2';
 import Koa = require('koa');
 import jwt = require('koa-jwt');
 import cors = require('@koa/cors');
 import v2 from './routes';
 
-import serve = require('koa-static');
+// import serve = require('koa-static');	//nginx处理静态资源
 import koaBody = require('koa-body');
 import UpFile from './util/upfile';
 import path = require('path');
@@ -28,8 +28,9 @@ import * as fs from 'fs';
 const option = {
 	key: fs.readFileSync('./privkey1.pem', 'utf8'),
 	cert: fs.readFileSync('./cert1.pem', 'utf8'),
+	allowHTTP1: true,
 };
-const server = Server.createServer(option, app.callback());
+const server = http2.createSecureServer(option, app.callback());
 
 (async () => {
 	try {
@@ -49,7 +50,7 @@ app.use(conditional());
 app.use(etag());
 app.use(helmet());
 app.use(cors());
-app.use(serve('public'));
+// app.use(serve('public'));	//nginx反代接口，不需要处理静态资源
 
 // 用户错误处理
 app.use(async (ctx, next) => {
@@ -87,7 +88,9 @@ app.use(
 				file.path = path.join(dir, filename);
 			},
 		},
-		onError: (e) => {},
+		onError: (e) => {
+			console.log(`upload failed: ${e}`);
+		},
 	})
 );
 
